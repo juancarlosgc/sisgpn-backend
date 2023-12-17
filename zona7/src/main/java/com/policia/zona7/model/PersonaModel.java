@@ -18,19 +18,12 @@ public class PersonaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPersona;
-
     private String cedula;
-
     private String apellidos;
-
     private String nombres;
-
     private String fechaNacimiento;
-
     private String tipoSangre;
-
     private String ciudadNacimiento;
-
     private String telefono;
 
     @Enumerated
