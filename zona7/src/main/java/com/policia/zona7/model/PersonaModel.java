@@ -8,12 +8,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity(name="Persona")
 @Table(name="personas")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="idPersona")
+
 public class PersonaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +29,15 @@ public class PersonaModel {
     private String tipoSangre;
     private String ciudadNacimiento;
     private String telefono;
-
     @Enumerated
     private RangoEnum rango;
-
     private Boolean estaActivo;
+
+   @ManyToOne
+   @JoinColumn (name="idVehiculo")
+   VehiculoModel vehiculo;
+
+
 
     public PersonaModel(DatosRegistroPersonaDto datosRegistroPersonaDto) {
         this.cedula=datosRegistroPersonaDto.cedula();

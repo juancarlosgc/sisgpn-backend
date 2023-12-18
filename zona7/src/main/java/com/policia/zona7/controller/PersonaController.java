@@ -6,6 +6,7 @@ import com.policia.zona7.dto.persona.DatosRegistroPersonaDto;
 import com.policia.zona7.dto.persona.DatosRespuestaPersonaDto;
 import com.policia.zona7.model.PersonaModel;
 import com.policia.zona7.repository.IPersonaRepository;
+import com.policia.zona7.service.PersonaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class PersonaController {
 
     @Autowired
     private IPersonaRepository iPersonaRepository;
+
+    @Autowired
+    private PersonaService personaService;
 
     @PostMapping
     public ResponseEntity<DatosRespuestaPersonaDto> resgistrarPersona(@RequestBody @Valid DatosRegistroPersonaDto datosRegistroPersonaDto,
@@ -72,6 +76,7 @@ public class PersonaController {
     @Transactional
     public ResponseEntity eliminarPersona(@PathVariable Long idPersona){
         PersonaModel persona = iPersonaRepository.getReferenceById(idPersona);
+
         persona.desactivarPersona();
         return ResponseEntity.noContent().build();
     }
@@ -91,4 +96,9 @@ public class PersonaController {
                 persona.getRango());
         return ResponseEntity.ok(datosPersona);
     }
+
+   /* @GetMapping("/apellido/{apellido}")
+    public ResponseEntity<DatosRespuestaPersonaDto> buscarPorApellido(@PathVariable ("apellido") String apellido){
+            if (personaService.)
+    }*/
 }

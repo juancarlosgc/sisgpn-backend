@@ -10,6 +10,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity(name="Vehiculo")
 @Table(name="vehiculos")
 @Getter
@@ -33,6 +35,9 @@ public class VehiculoModel {
     private TipoVehiculoEnum tipoVehiculo;
     private String observaciones;
     private Boolean estaActivo;
+
+    @OneToMany (mappedBy = "vehiculo")
+    private List<PersonaModel> listaPersonas;
 
     public void desactivarVehiculo() {
         this.estaActivo=false;

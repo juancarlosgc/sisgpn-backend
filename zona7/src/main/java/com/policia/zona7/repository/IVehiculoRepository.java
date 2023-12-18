@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IVehiculoRepository extends JpaRepository<VehiculoModel, Long> {
     Page<VehiculoModel> findByEstaActivoTrue(Pageable paginacion);
+
 }
