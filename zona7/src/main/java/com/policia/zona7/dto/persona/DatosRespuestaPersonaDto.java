@@ -19,5 +19,6 @@ public record DatosRespuestaPersonaDto(
 
         String telefono,
 
-        RangoEnum rango) {
+        RangoEnum rango)
+{
 }

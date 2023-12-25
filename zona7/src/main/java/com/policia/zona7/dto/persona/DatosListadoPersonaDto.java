@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 
 public record DatosListadoPersonaDto(
+        Long idPersona,
         String cedula,
 
         String apellidos,
@@ -24,7 +25,8 @@ public record DatosListadoPersonaDto(
         RangoEnum rango
         ) {
     public DatosListadoPersonaDto(PersonaModel personaModel){
-        this(personaModel.getCedula(),
+        this(personaModel.getIdPersona(),
+                personaModel.getCedula(),
                 personaModel.getApellidos(),
                 personaModel.getNombres(),
                 personaModel.getFechaNacimiento(),

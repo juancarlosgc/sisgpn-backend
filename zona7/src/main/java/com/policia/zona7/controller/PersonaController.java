@@ -18,18 +18,23 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("personas")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PersonaController {
 
     @Autowired
     private IPersonaRepository iPersonaRepository;
 
-    @Autowired
-    private PersonaService personaService;
 
-    @PostMapping
+    @GetMapping("/vertodos")
+    public List<PersonaModel> list(){
+        return iPersonaRepository.findAll();
+    }
+
+    @PostMapping("/crearpersona")
     public ResponseEntity<DatosRespuestaPersonaDto> resgistrarPersona(@RequestBody @Valid DatosRegistroPersonaDto datosRegistroPersonaDto,
                                             UriComponentsBuilder uriComponentsBuilder){
        PersonaModel persona = iPersonaRepository.save(new PersonaModel(datosRegistroPersonaDto));
@@ -49,12 +54,12 @@ public class PersonaController {
     }
 
 
-    @GetMapping
-    public ResponseEntity<Page<DatosListadoPersonaDto>> listadoMedicos(@PageableDefault(size = 5) Pageable paginacion) {
+   @GetMapping("/vertodo")
+    public ResponseEntity<Page<DatosListadoPersonaDto>> listadoPersona(@PageableDefault(size = 10) Pageable paginacion) {
         return ResponseEntity.ok(iPersonaRepository.findByEstaActivoTrue(paginacion).map(DatosListadoPersonaDto::new));
     }
 
-    @PutMapping
+    @PutMapping("/editar")
     @Transactional
     public ResponseEntity actualizarPersona(@RequestBody @Valid DatosActualizarPersonaDto datosActualizarPersonaDto){
         PersonaModel persona  =iPersonaRepository.getReferenceById(datosActualizarPersonaDto.idPersona());
@@ -72,7 +77,7 @@ public class PersonaController {
                 ));
     }
 
-    @DeleteMapping("/{idPersona}")
+    @DeleteMapping("/eliminar/{idPersona}")
     @Transactional
     public ResponseEntity eliminarPersona(@PathVariable Long idPersona){
         PersonaModel persona = iPersonaRepository.getReferenceById(idPersona);
@@ -81,7 +86,7 @@ public class PersonaController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{idPersona}")
+    @GetMapping("/ver/{idPersona}")
     @Transactional
     public ResponseEntity<DatosRespuestaPersonaDto> listadoPersonaId(@PathVariable Long idPersona){
         PersonaModel persona = iPersonaRepository.getReferenceById(idPersona);
@@ -96,9 +101,4 @@ public class PersonaController {
                 persona.getRango());
         return ResponseEntity.ok(datosPersona);
     }
-
-   /* @GetMapping("/apellido/{apellido}")
-    public ResponseEntity<DatosRespuestaPersonaDto> buscarPorApellido(@PathVariable ("apellido") String apellido){
-            if (personaService.)
-    }*/
 }

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.StandardException;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 
@@ -22,6 +23,7 @@ public record  DatosRegistroPersonaDto(
         @NotBlank
         String nombres,
         @NotBlank
+        @DateTimeFormat
         String fechaNacimiento,
         @NotBlank
         String tipoSangre,
