@@ -13,12 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("personas")
@@ -29,10 +33,10 @@ public class PersonaController {
     private IPersonaRepository iPersonaRepository;
 
 
-    @GetMapping("/vertodos")
-    public List<PersonaModel> list(){
-        return iPersonaRepository.findAll();
-    }
+    //@GetMapping("/vertodos")
+    //public List<PersonaModel> list(){
+        //return iPersonaRepository.findAll();
+   // }
 
     @PostMapping("/crearpersona")
     public ResponseEntity<DatosRespuestaPersonaDto> resgistrarPersona(@RequestBody @Valid DatosRegistroPersonaDto datosRegistroPersonaDto,
@@ -55,7 +59,7 @@ public class PersonaController {
 
 
    @GetMapping("/vertodo")
-    public ResponseEntity<Page<DatosListadoPersonaDto>> listadoPersona(@PageableDefault(size = 10) Pageable paginacion) {
+    public ResponseEntity<Page<DatosListadoPersonaDto>> listadoPersona(@PageableDefault(size = 5) Pageable paginacion) {
         return ResponseEntity.ok(iPersonaRepository.findByEstaActivoTrue(paginacion).map(DatosListadoPersonaDto::new));
     }
 
@@ -88,9 +92,17 @@ public class PersonaController {
 
     @GetMapping("/ver/{idPersona}")
     @Transactional
-    public ResponseEntity<DatosRespuestaPersonaDto> listadoPersonaId(@PathVariable Long idPersona){
+    public ResponseEntity<?> listadoPersonaId(@PathVariable Long idPersona){
         PersonaModel persona = iPersonaRepository.getReferenceById(idPersona);
-        var datosPersona = new DatosRespuestaPersonaDto( persona.getIdPersona(),
+
+
+       /* Map<String, Object> response = new HashMap<>();
+        if (persona==null){
+            response.put("mensaje", "El registro no existe en la base de datos ");
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }*/
+        var datosPersona = new DatosRespuestaPersonaDto(
+                persona.getIdPersona(),
                 persona.getCedula(),
                 persona.getApellidos(),
                 persona.getNombres(),

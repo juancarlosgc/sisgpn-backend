@@ -3,6 +3,9 @@ package com.policia.zona7.dto.persona;
 import com.policia.zona7.model.RangoEnum;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public record DatosActualizarPersonaDto(
         @NotNull
         Long idPersona,
@@ -13,7 +16,7 @@ public record DatosActualizarPersonaDto(
 
         String nombres,
 
-        String fechaNacimiento,
+        Date fechaNacimiento,
 
         String tipoSangre,
 

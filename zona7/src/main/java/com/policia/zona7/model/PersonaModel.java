@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,8 @@ public class PersonaModel {
     private String cedula;
     private String apellidos;
     private String nombres;
-    private String fechaNacimiento;
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
     private String tipoSangre;
     private String ciudadNacimiento;
     private String telefono;
@@ -34,9 +36,18 @@ public class PersonaModel {
     private RangoEnum rango;
     private Boolean estaActivo;
 
-   @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idVehiculo")  //OPCIONAL
+    private VehiculoModel vehiculo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idSubcircuito")  //OPCIONAL
+    private SubcircuitoModel subcircuito;
+
+
+  /* @ManyToOne
    @JoinColumn (name="idVehiculo")
-   VehiculoModel vehiculo;
+   VehiculoModel vehiculo;*/
 
 
 

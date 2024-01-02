@@ -1,6 +1,9 @@
 package com.policia.zona7.dto.persona;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.policia.zona7.model.RangoEnum;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -12,6 +15,8 @@ import lombok.experimental.StandardException;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 
 public record  DatosRegistroPersonaDto(
@@ -22,9 +27,8 @@ public record  DatosRegistroPersonaDto(
         String apellidos,
         @NotBlank
         String nombres,
-        @NotBlank
-        @DateTimeFormat
-        String fechaNacimiento,
+        @NotNull
+        Date fechaNacimiento,
         @NotBlank
         String tipoSangre,
         @NotBlank
@@ -32,7 +36,8 @@ public record  DatosRegistroPersonaDto(
         @NotBlank
         String telefono,
         @NotNull
-        RangoEnum rango
+        RangoEnum rango,
+        Long idVehiculo
 ) {
 
 

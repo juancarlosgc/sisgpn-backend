@@ -4,6 +4,9 @@ import com.policia.zona7.model.RangoEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public record DatosRespuestaPersonaDto(
         Long idPersona,
         String cedula,
@@ -11,7 +14,7 @@ public record DatosRespuestaPersonaDto(
 
         String nombres,
 
-        String fechaNacimiento,
+        Date fechaNacimiento,
 
         String tipoSangre,
 

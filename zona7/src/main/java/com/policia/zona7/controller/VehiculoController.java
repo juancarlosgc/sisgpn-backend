@@ -25,12 +25,13 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("vehiculos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class VehiculoController {
 
     @Autowired
     private IVehiculoRepository iVehiculoRepository;
 
-    @PostMapping
+    @PostMapping("/crearvehiculo")
     public ResponseEntity<DatosRespuestaVehiculoDto> resgistrarVehiculo(@RequestBody @Valid DatosRegistroVehiculoDto datosRegistroVehiculoDto,
                                                                        UriComponentsBuilder uriComponentsBuilder){
         VehiculoModel vehiculo = iVehiculoRepository.save(new VehiculoModel(datosRegistroVehiculoDto));
@@ -52,12 +53,12 @@ public class VehiculoController {
         return ResponseEntity.created(url).body(datosRespuestaVehiculoDto);
     }
 
-    @GetMapping
+    @GetMapping("/vertodo")
     public ResponseEntity<Page<DatosListadoVehiculoDto>> listadoMedicos(@PageableDefault(size = 5) Pageable paginacion) {
         return ResponseEntity.ok(iVehiculoRepository.findByEstaActivoTrue(paginacion).map(DatosListadoVehiculoDto::new));
     }
 
-    @PutMapping
+    @PutMapping("/editar")
     @Transactional
     public ResponseEntity actualizarVehiculo(@RequestBody @Valid DatosActualizarVehiculoDto datosActualizarVehiculoDto){
         VehiculoModel vehiculo  =iVehiculoRepository.getReferenceById(datosActualizarVehiculoDto.idVehiculo());
@@ -79,7 +80,7 @@ public class VehiculoController {
         ));
     }
 
-    @DeleteMapping("/{idVehiculo}")
+    @DeleteMapping("/eliminar/{idVehiculo}")
     @Transactional
     public ResponseEntity eliminarVehiculo(@PathVariable Long idVehiculo){
         VehiculoModel vehiculo = iVehiculoRepository.getReferenceById(idVehiculo);
@@ -87,7 +88,7 @@ public class VehiculoController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{idVehiculo}")
+    @GetMapping("/ver/{idVehiculo}")
     @Transactional
     public ResponseEntity<DatosRespuestaVehiculoDto> listadoVehiculoId(@PathVariable Long idVehiculo){
         VehiculoModel vehiculo = iVehiculoRepository.getReferenceById(idVehiculo);

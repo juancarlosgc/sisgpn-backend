@@ -5,6 +5,7 @@ import com.policia.zona7.model.TipoVehiculoEnum;
 import com.policia.zona7.model.VehiculoModel;
 
 public record DatosListadoVehiculoDto(
+        Long idVehiculo,
         String placa,
         String chasis,
         String marca,
@@ -20,7 +21,9 @@ public record DatosListadoVehiculoDto(
 ) {
 
     public DatosListadoVehiculoDto(VehiculoModel vehiculoModel){
-        this(vehiculoModel.getPlaca(),
+        this(
+                vehiculoModel.getIdVehiculo(),
+                vehiculoModel.getPlaca(),
                 vehiculoModel.getChasis(),
                 vehiculoModel.getMarca(),
                 vehiculoModel.getModelo(),

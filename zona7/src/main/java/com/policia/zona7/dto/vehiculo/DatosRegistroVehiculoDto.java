@@ -26,7 +26,7 @@ public record DatosRegistroVehiculoDto(
         @NotNull
         TipoVehiculoEnum tipoVehiculo,
 
-        @NotBlank
+
         String observaciones
 
 ) {

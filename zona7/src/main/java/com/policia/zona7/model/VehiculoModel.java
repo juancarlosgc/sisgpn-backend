@@ -10,12 +10,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name="Vehiculo")
 @Table(name="vehiculos")
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="idVehiculo")
 public class VehiculoModel {
@@ -34,10 +34,22 @@ public class VehiculoModel {
     @Enumerated
     private TipoVehiculoEnum tipoVehiculo;
     private String observaciones;
+    private Integer contador;
     private Boolean estaActivo;
 
-    @OneToMany (mappedBy = "vehiculo")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "vehiculo", cascade = CascadeType.ALL)
     private List<PersonaModel> listaPersonas;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idSubcircuito")  //OPCIONAL
+    private SubcircuitoModel subcircuito;
+
+    public VehiculoModel(){
+        this.listaPersonas=new ArrayList<>();
+    }
+
+/*    @OneToMany (mappedBy = "vehiculo")
+    private List<PersonaModel> listaPersonas;*/
 
     public void desactivarVehiculo() {
         this.estaActivo=false;
@@ -56,6 +68,7 @@ public class VehiculoModel {
         this.tipoVehiculo=datosRegistroVehiculoDto.tipoVehiculo();
         this.observaciones=datosRegistroVehiculoDto.observaciones();
         this.estaActivo=true;
+        this.contador=0;
     }
 
     public void actualizarDatosVehiculo(DatosActualizarVehiculoDto datosActualizarVehiculoDto){

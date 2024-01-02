@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public record DatosListadoPersonaDto(
         Long idPersona,
         String cedula,
@@ -14,7 +17,7 @@ public record DatosListadoPersonaDto(
 
         String nombres,
 
-        String fechaNacimiento,
+        Date fechaNacimiento,
 
         String tipoSangre,
 
