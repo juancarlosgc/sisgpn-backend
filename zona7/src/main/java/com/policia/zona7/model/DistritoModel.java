@@ -29,6 +29,7 @@ public class DistritoModel {
     //@JsonIgnoreProperties({"distrito"})
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "distrito", cascade = CascadeType.ALL)
     private List<CircuitoModel> listaCircuitos;
+
   /*  public DistritoModel(){
         this.listaCircuitos=new ArrayList<>();
     }*/

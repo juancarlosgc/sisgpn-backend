@@ -6,7 +6,8 @@ public record DatosListadoCircuitoDto(
         Long idCircuito,
         String codigoCircuito,
         String nombreCircuito,
-        Long idDistrito
+        Long idDistrito,
+        String nombreDistrito
 
 ){
     public DatosListadoCircuitoDto(CircuitoModel circuitoModel){
@@ -14,7 +15,8 @@ public record DatosListadoCircuitoDto(
                 circuitoModel.getIdCircuito(),
                 circuitoModel.getCodigoCircuito(),
                 circuitoModel.getNombreCircuito(),
-                circuitoModel.getDistrito().getIdDistrito()
+                circuitoModel.getDistrito().getIdDistrito(),
+                circuitoModel.getDistrito().getNombreDistrito()
         );
     }
 

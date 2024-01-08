@@ -17,9 +17,6 @@ public interface ICircuitoRepository extends JpaRepository<CircuitoModel, Long> 
     Page<CircuitoModel> findByEstaActivoTrue(Pageable paginacion);
 
 
-   // @Query("")
-  /* @Query(value = "select from circuitos C inner join distritos D on C.id_distrito = D.id_distrito;", nativeQuery=true)
-    List<CircuitoModel> obtenerCircuitosConDistritos();*/
-
-
+   @Query(value = "select * from circuitos", nativeQuery=true)
+    Page<CircuitoModel> obtenerCircuitosConDistritos(Pageable paginacion);
 }

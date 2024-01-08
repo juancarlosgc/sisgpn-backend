@@ -37,8 +37,6 @@ public class CircuitoController {
     private CircuitoService circuitoService;
 
 
-
-
     @PostMapping("/crearcircuito")
     @Transactional
     public ResponseEntity circuitoasignar(@RequestBody @Valid DatosRegistroCircuitoDto datos) {
@@ -46,14 +44,14 @@ public class CircuitoController {
         return ResponseEntity.ok(new DatosDetalleCircuitoDto(null, datos.codigoCircuito(), datos.nombreCircuito(), datos.idDistrito()));
     }
 
- @GetMapping("/vertodo")
+    @GetMapping("/vertodo")
     public ResponseEntity<Page<DatosListadoCircuitoDto>> listadoCircuito(@PageableDefault(size = 5) Pageable paginacion) {
         return ResponseEntity.ok(iCircuitoRepository.findByEstaActivoTrue(paginacion).map(DatosListadoCircuitoDto::new));
     }
 
    /* @GetMapping("/vertodo")
-    public ResponseEntity<List<CircuitoModel>> listadoCircuito() {
-        return ResponseEntity.ok(iCircuitoRepository.obtenerCircuitosConDistritos());
+    public ResponseEntity<Page<DatosListadoCircuitoDto>> listadoCircuito(@PageableDefault(size = 5) Pageable paginacion) {
+        return ResponseEntity.ok(iCircuitoRepository.obtenerCircuitosConDistritos(paginacion).map(DatosListadoCircuitoDto::new));
     }*/
 
     @GetMapping("/ver/{idCircuito}")
@@ -82,7 +80,7 @@ public class CircuitoController {
         service.editar(datos);
     }
 
-   /* @GetMapping("/listarcircuitos")
+  /*  @GetMapping("/listarcircuitos")
     public List<CircuitoModel> list(){
         return iCircuitoRepository.findAll();
     }*/
