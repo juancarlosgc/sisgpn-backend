@@ -16,16 +16,16 @@ public class CircuitoDistritoService {
     @Autowired
     private ICircuitoRepository iCircuitoRepository;
 
-    public void asignar(DatosRegistroCircuitoDto datosRegistroCircuitoAsigDto){
-        var distrito=iDistritoRepository.findById(datosRegistroCircuitoAsigDto.idDistrito()).get();
-        var distritoCircuito= new CircuitoModel(null, datosRegistroCircuitoAsigDto.codigoCircuito(), datosRegistroCircuitoAsigDto.nombreCircuito(),true, distrito);
+    public void guardar(DatosRegistroCircuitoDto datosRegistroCircuitoDto){
+        var distrito=iDistritoRepository.findById(datosRegistroCircuitoDto.idDistrito()).get();
+        var distritoCircuito= new CircuitoModel(null, datosRegistroCircuitoDto.codigoCircuito(), datosRegistroCircuitoDto.nombreCircuito(),true, distrito);
         iCircuitoRepository.save(distritoCircuito);
     }
 
     public void editar(DatosActualizarCircuitoDto datosActualizarCircuitoDto){
         CircuitoModel circuito  = iCircuitoRepository.getReferenceById(datosActualizarCircuitoDto.idCircuito());
         var distrito=iDistritoRepository.getReferenceById(datosActualizarCircuitoDto.idDistrito());
-        var distritoCircuito= new CircuitoModel(circuito.getIdCircuito(), datosActualizarCircuitoDto.codigoCircuito(), datosActualizarCircuitoDto.nombreCircuito(),true, distrito);
-        iCircuitoRepository.save(distritoCircuito);
+        var circuitoEditado= new CircuitoModel(circuito.getIdCircuito(), datosActualizarCircuitoDto.codigoCircuito(), datosActualizarCircuitoDto.nombreCircuito(),true, distrito);
+        iCircuitoRepository.save(circuitoEditado);
     }
    }
