@@ -1,20 +1,16 @@
 package com.policia.zona7.model;
 
-import com.policia.zona7.dto.circuito.DatosActualizarCircuitoDto;
-import com.policia.zona7.dto.circuito.DatosRegistroCircuitoDto;
-import com.policia.zona7.dto.distrito.DatosActualizarDistritoDto;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.policia.zona7.dto.circuito.DatosActualizarCircuitoDto;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity(name="Circuito")
 @Table(name="circuitos")
 @Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="idCircuito")
 public class CircuitoModel {
@@ -25,34 +21,23 @@ public class CircuitoModel {
     private String nombreCircuito;
     private Boolean estaActivo;
 
-
+    //@JsonIgnoreProperties({"circuitos"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idDistrito")  //OPCIONAL
+    @JoinColumn(name = "id_distrito")  //OPCIONAL
+    @JsonIgnoreProperties(value={"circuitos","hibernateLazyInitializer","handler"},allowSetters = true)
     private DistritoModel distrito;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "circuito", cascade = CascadeType.ALL)
-    private List<SubcircuitoModel> listaSubcircuitos;
-    public CircuitoModel(){
-        this.listaSubcircuitos=new ArrayList<>();
-    }
-
-
-    public CircuitoModel(DatosRegistroCircuitoDto datosRegistroCircuitoDto) {
-        this.codigoCircuito = datosRegistroCircuitoDto.codigoCircuito();
-        this.nombreCircuito = datosRegistroCircuitoDto.nombreCircuito();
-        this.estaActivo = true;
-    }
-
-    public void actualizarDatosCircuito(DatosActualizarCircuitoDto datosActualizarCircuitoDto) {
-        if (datosActualizarCircuitoDto.codigoCircuito() != null) {
-            this.codigoCircuito = datosActualizarCircuitoDto.codigoCircuito();
+    public void actualizarDatosCircuito(DatosActualizarCircuitoDto datos) {
+        if (datos.codigoCircuito() != null) {
+            this.codigoCircuito = datos.codigoCircuito();
         }
-        if (datosActualizarCircuitoDto.nombreCircuito() != null) {
-            this.nombreCircuito = datosActualizarCircuitoDto.nombreCircuito();
+        if (datos.nombreCircuito() != null) {
+            this.nombreCircuito = datos.nombreCircuito();
         }
     }
 
     public void desactivarCircuito() {
         this.estaActivo=false;
     }
+
 }

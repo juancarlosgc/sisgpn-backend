@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("distritos")
@@ -78,6 +79,11 @@ public class DistritoController {
                 distrito.getParroquia());
 
         return ResponseEntity.ok(datosDistrito);
+    }
+
+    @GetMapping("/listardistritos")
+    public List<DistritoModel> list(){
+        return iDistritoRepository.findAll();
     }
 
 

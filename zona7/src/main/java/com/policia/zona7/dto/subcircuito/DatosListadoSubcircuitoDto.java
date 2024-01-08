@@ -1,6 +1,5 @@
 package com.policia.zona7.dto.subcircuito;
 
-import com.policia.zona7.model.CircuitoModel;
 import com.policia.zona7.model.SubcircuitoModel;
 
 public record DatosListadoSubcircuitoDto(

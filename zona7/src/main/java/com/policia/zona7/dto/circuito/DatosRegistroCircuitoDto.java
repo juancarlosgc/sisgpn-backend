@@ -1,12 +1,14 @@
 package com.policia.zona7.dto.circuito;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record DatosRegistroCircuitoDto(
-        @NotBlank
+        Long idCircuito,
+        @NotNull
         String codigoCircuito,
-
-        @NotBlank
-        String nombreCircuito
+        @NotNull
+        String nombreCircuito,
+        @NotNull
+        Long idDistrito
 ) {
 }

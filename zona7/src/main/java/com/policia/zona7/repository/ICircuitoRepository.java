@@ -5,7 +5,21 @@ import com.policia.zona7.model.DistritoModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface ICircuitoRepository extends JpaRepository<CircuitoModel, Long> {
+
+
     Page<CircuitoModel> findByEstaActivoTrue(Pageable paginacion);
+
+
+   // @Query("")
+  /* @Query(value = "select from circuitos C inner join distritos D on C.id_distrito = D.id_distrito;", nativeQuery=true)
+    List<CircuitoModel> obtenerCircuitosConDistritos();*/
+
+
 }

@@ -19,13 +19,13 @@ public record DatosRegistroVehiculoDto(
         Double kilometraje,
         @NotNull
         Double cilindraje,
+        @NotNull
        // @NotBlank
         Double capacidadCarga,
         @NotNull
         Integer capacidadPasajeros,
         @NotNull
         TipoVehiculoEnum tipoVehiculo,
-
 
         String observaciones
 

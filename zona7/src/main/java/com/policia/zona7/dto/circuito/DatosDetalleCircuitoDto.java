@@ -1,6 +1,6 @@
 package com.policia.zona7.dto.circuito;
 
-public record DatosActualizarCircuitoDto(
+public record DatosDetalleCircuitoDto(
         Long idCircuito,
         String codigoCircuito,
         String nombreCircuito,

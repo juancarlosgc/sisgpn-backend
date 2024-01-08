@@ -1,16 +1,11 @@
 package com.policia.zona7.controller;
 
-import com.policia.zona7.dto.circuito.DatosActualizarCircuitoDto;
-import com.policia.zona7.dto.circuito.DatosListadoCircuitoDto;
-import com.policia.zona7.dto.circuito.DatosRegistroCircuitoDto;
-import com.policia.zona7.dto.circuito.DatosRespuestaCircuitoDto;
+
 import com.policia.zona7.dto.subcircuito.DatosActualizarSubcircuitoDto;
 import com.policia.zona7.dto.subcircuito.DatosListadoSubcircuitoDto;
 import com.policia.zona7.dto.subcircuito.DatosRegistroSubcircuitoDto;
 import com.policia.zona7.dto.subcircuito.DatosRespuestaSubcircuitoDto;
-import com.policia.zona7.model.CircuitoModel;
 import com.policia.zona7.model.SubcircuitoModel;
-import com.policia.zona7.repository.ICircuitoRepository;
 import com.policia.zona7.repository.ISubcircuitoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -76,12 +71,10 @@ public class SubcircuitoController {
     @Transactional
     public ResponseEntity<?> listadoCircuitoId(@PathVariable Long idSubcircuito){
         SubcircuitoModel subcircuito = iSubcircuitoRepository.getReferenceById(idSubcircuito);
-        var datosSubcircuito = new DatosRespuestaCircuitoDto(
+        var datosSubcircuito = new DatosRespuestaSubcircuitoDto(
                 subcircuito.getIdSubcircuito(),
                 subcircuito.getCodigoSubcircuito(),
                 subcircuito.getNombreSubcircuito());
         return ResponseEntity.ok(datosSubcircuito);
     }
-
-
 }

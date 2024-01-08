@@ -1,12 +1,10 @@
 package com.policia.zona7.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.policia.zona7.dto.distrito.DatosActualizarDistritoDto;
 import com.policia.zona7.dto.distrito.DatosRegistroDistritoDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,8 @@ import java.util.List;
 @Entity(name="Distrito")
 @Table(name="distritos")
 @Getter
-
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="idDistrito")
 public class DistritoModel {
@@ -26,11 +25,13 @@ public class DistritoModel {
     private String parroquia;
     private Boolean estaActivo;
 
+    @JsonIgnoreProperties(value={"distrito","hibernateLazyInitializer","handler"},allowSetters = true)
+    //@JsonIgnoreProperties({"distrito"})
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "distrito", cascade = CascadeType.ALL)
     private List<CircuitoModel> listaCircuitos;
-    public DistritoModel(){
+  /*  public DistritoModel(){
         this.listaCircuitos=new ArrayList<>();
-    }
+    }*/
 
     public DistritoModel(DatosRegistroDistritoDto datosRegistroDistritoDto) {
         this.codigoDistrito=datosRegistroDistritoDto.codigoDistrito();
