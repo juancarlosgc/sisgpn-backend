@@ -13,7 +13,7 @@ import java.util.Optional;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode(of="idItem")
 public class ItemMantenimientoModel {
     @Id
@@ -32,11 +32,12 @@ public class ItemMantenimientoModel {
     @JoinColumn(name = "idMantenimiento")  //OPCIONAL
     private MantenimientoModel mantenimiento;
 
-    public ItemMantenimientoModel(Long idItem, String codigoItem, String nombreItem, String descripcionItem, MantenimientoModel mantenimiento) {
+    public ItemMantenimientoModel(Long idItem, String codigoItem, String nombreItem, String descripcionItem, Boolean estaActivo, MantenimientoModel mantenimiento) {
         this.idItem = idItem;
         this.codigoItem = codigoItem;
         this.nombreItem = nombreItem;
         this.descripcionItem = descripcionItem;
+        this.estaActivo= estaActivo;
         this.mantenimiento = mantenimiento;
     }
 

@@ -64,7 +64,7 @@ public class ItemMantenimientoController {
     public ResponseEntity<DatosRespuestaItemDto> actualizarItem(@RequestBody @Valid DatosActualizarItemDto datos){
         ItemMantenimientoModel item= iItemMantenimientoRepository.getReferenceById(datos.idItem());
         var idMantenimiento=iMantenimientoRepository.getReferenceById(datos.idMantenimiento());
-        var itemEditado= new ItemMantenimientoModel(item.getIdItem(), datos.codigoItem(),datos.nombreItem(), datos.descripcionItem(), idMantenimiento);
+        var itemEditado= new ItemMantenimientoModel(item.getIdItem(), datos.codigoItem(),datos.nombreItem(), datos.descripcionItem(),true, idMantenimiento);
         iItemMantenimientoRepository.save(itemEditado);
         return ResponseEntity.ok().build();
     }
