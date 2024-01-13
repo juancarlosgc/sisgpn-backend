@@ -94,13 +94,6 @@ public class PersonaController {
     @Transactional
     public ResponseEntity<?> listadoPersonaId(@PathVariable Long idPersona){
         PersonaModel persona = iPersonaRepository.getReferenceById(idPersona);
-
-
-       /* Map<String, Object> response = new HashMap<>();
-        if (persona==null){
-            response.put("mensaje", "El registro no existe en la base de datos ");
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-        }*/
         var datosPersona = new DatosRespuestaPersonaDto(
                 persona.getIdPersona(),
                 persona.getCedula(),

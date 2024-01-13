@@ -40,5 +40,4 @@ public record  DatosRegistroPersonaDto(
         Long idVehiculo
 ) {
 
-
 }

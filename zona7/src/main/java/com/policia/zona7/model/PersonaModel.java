@@ -3,10 +3,8 @@ package com.policia.zona7.model;
 import com.policia.zona7.dto.persona.DatosActualizarPersonaDto;
 import com.policia.zona7.dto.persona.DatosRegistroPersonaDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Pattern;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -16,6 +14,7 @@ import java.util.Set;
 @Entity(name="Persona")
 @Table(name="personas")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="idPersona")
@@ -23,6 +22,7 @@ import java.util.Set;
 public class PersonaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @Pattern(regexp = "\\d{10}")
     private Long idPersona;
     private String cedula;
     private String apellidos;
@@ -37,11 +37,12 @@ public class PersonaModel {
     private Boolean estaActivo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idVehiculo")  //OPCIONAL
+    @JoinColumn(name = "id_vehiculo")  //OPCIONAL
     private VehiculoModel vehiculo;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idSubcircuito")  //OPCIONAL
+    @JoinColumn(name = "id_subcircuito")  //OPCIONAL
     private SubcircuitoModel subcircuito;
 
 
@@ -53,11 +54,11 @@ public class PersonaModel {
 
     public PersonaModel(DatosRegistroPersonaDto datosRegistroPersonaDto) {
         this.cedula=datosRegistroPersonaDto.cedula();
-        this.nombres=datosRegistroPersonaDto.nombres();
-        this.apellidos=datosRegistroPersonaDto.apellidos();
+        this.nombres=datosRegistroPersonaDto.nombres().toUpperCase();
+        this.apellidos=datosRegistroPersonaDto.apellidos().toUpperCase();
         this.fechaNacimiento=datosRegistroPersonaDto.fechaNacimiento();
-        this.tipoSangre=datosRegistroPersonaDto.tipoSangre();
-        this.ciudadNacimiento=datosRegistroPersonaDto.ciudadNacimiento();
+        this.tipoSangre=datosRegistroPersonaDto.tipoSangre().toUpperCase();
+        this.ciudadNacimiento=datosRegistroPersonaDto.ciudadNacimiento().toUpperCase();
         this.telefono=datosRegistroPersonaDto.telefono();
         this.rango=datosRegistroPersonaDto.rango();
         this.estaActivo=true;

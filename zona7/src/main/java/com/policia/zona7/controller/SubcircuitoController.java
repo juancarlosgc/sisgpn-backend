@@ -59,9 +59,6 @@ public class SubcircuitoController {
         service.editar(datos);
     }
 
-
-
-
     @DeleteMapping("/eliminar/{idSubcircuito}")
     @Transactional
     public ResponseEntity eliminarSubcircuito(@PathVariable Long idSubcircuito){

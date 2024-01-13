@@ -10,8 +10,11 @@ import java.util.Optional;
 
 @Repository
 public interface IPersonaRepository extends JpaRepository<PersonaModel, Long> {
+
     Page<PersonaModel> findByEstaActivoTrue(Pageable paginacion);
 
     public Optional<PersonaModel> findByApellidos(String apellidos);
+
+
 
 }

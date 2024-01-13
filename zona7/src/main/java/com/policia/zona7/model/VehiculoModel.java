@@ -40,6 +40,8 @@ public class VehiculoModel {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vehiculo", cascade = CascadeType.ALL)
     private List<PersonaModel> listaPersonas;
 
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idSubcircuito")  //OPCIONAL
     private SubcircuitoModel subcircuito;
@@ -48,7 +50,7 @@ public class VehiculoModel {
         this.listaPersonas=new ArrayList<>();
     }
 
-/*    @OneToMany (mappedBy = "vehiculo")
+  /*  @OneToMany (mappedBy = "vehiculo")
     private List<PersonaModel> listaPersonas;*/
 
     public void desactivarVehiculo() {
@@ -56,17 +58,17 @@ public class VehiculoModel {
     }
 
     public VehiculoModel(DatosRegistroVehiculoDto datosRegistroVehiculoDto) {
-        this.placa=datosRegistroVehiculoDto.placa();
-        this.chasis= datosRegistroVehiculoDto.chasis();
-        this.marca= datosRegistroVehiculoDto.marca();
-        this.modelo= datosRegistroVehiculoDto.modelo();
-        this.motor= datosRegistroVehiculoDto.motor();
+        this.placa=datosRegistroVehiculoDto.placa().toUpperCase();
+        this.chasis= datosRegistroVehiculoDto.chasis().toUpperCase();
+        this.marca= datosRegistroVehiculoDto.marca().toUpperCase();
+        this.modelo= datosRegistroVehiculoDto.modelo().toUpperCase();
+        this.motor= datosRegistroVehiculoDto.motor().toUpperCase();
         this.kilometraje= datosRegistroVehiculoDto.kilometraje();
         this.cilindraje= datosRegistroVehiculoDto.cilindraje();
         this.capacidadCarga= datosRegistroVehiculoDto.capacidadCarga();
         this.cantidadPasajeros=datosRegistroVehiculoDto.capacidadPasajeros();
         this.tipoVehiculo=datosRegistroVehiculoDto.tipoVehiculo();
-        this.observaciones=datosRegistroVehiculoDto.observaciones();
+        this.observaciones=datosRegistroVehiculoDto.observaciones().toUpperCase();
         this.estaActivo=true;
         this.contador=0;
     }

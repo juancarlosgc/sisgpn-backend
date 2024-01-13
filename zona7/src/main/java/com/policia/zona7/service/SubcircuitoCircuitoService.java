@@ -22,14 +22,14 @@ public class SubcircuitoCircuitoService {
 
     public void guardar(DatosRegistroSubcircuitoDto datosRegistroSubcircuitoDto){
         var circuito=iCircuitoRepository.findById(datosRegistroSubcircuitoDto.idCircuito()).get();
-        var circuitoSubcircuito= new SubcircuitoModel(null, datosRegistroSubcircuitoDto.codigoSubcircuito(), datosRegistroSubcircuitoDto.nombreSubcircuito(),true, circuito,null,null);
+        var circuitoSubcircuito= new SubcircuitoModel(null, datosRegistroSubcircuitoDto.codigoSubcircuito(), datosRegistroSubcircuitoDto.nombreSubcircuito(),true, circuito);
         iSubcircuitoRepository.save(circuitoSubcircuito);
     }
 
     public void editar(DatosActualizarSubcircuitoDto datosActualizarSubcircuitoDto){
         SubcircuitoModel subcircuito  = iSubcircuitoRepository.getReferenceById(datosActualizarSubcircuitoDto.idSubcircuito());
         var circuito=iCircuitoRepository.getReferenceById(datosActualizarSubcircuitoDto.idCircuito());
-        var subcircuitoEditado= new SubcircuitoModel(subcircuito.getIdSubcircuito(), datosActualizarSubcircuitoDto.codigoSubcircuito(), datosActualizarSubcircuitoDto.nombreSubcircuito(),true, circuito,null,null);
+        var subcircuitoEditado= new SubcircuitoModel(subcircuito.getIdSubcircuito(), datosActualizarSubcircuitoDto.codigoSubcircuito(), datosActualizarSubcircuitoDto.nombreSubcircuito(),true, circuito);
         iSubcircuitoRepository.save(subcircuitoEditado);
     }
 
