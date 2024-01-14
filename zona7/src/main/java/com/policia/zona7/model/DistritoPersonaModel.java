@@ -15,7 +15,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 //@AllArgsConstructor
-@EqualsAndHashCode(of="idDistrito")
+@EqualsAndHashCode(of="idDistritoPersona")
 public class DistritoPersonaModel {
 
     @Id

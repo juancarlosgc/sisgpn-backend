@@ -18,6 +18,7 @@ public record DatosListadoDistritoPersonaDto(
         String apellidos,
 
         String nombres,
+
         String cedula
 ) {
     public DatosListadoDistritoPersonaDto(DistritoPersonaModel distritoPersonaModel){
