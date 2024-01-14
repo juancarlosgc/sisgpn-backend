@@ -5,10 +5,7 @@ import com.policia.zona7.dto.persona.DatosRegistroPersonaDto;
 import com.policia.zona7.dto.vehiculo.DatosActualizarVehiculoDto;
 import com.policia.zona7.dto.vehiculo.DatosRegistroVehiculoDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +13,7 @@ import java.util.List;
 @Entity(name="Vehiculo")
 @Table(name="vehiculos")
 @Getter
+@Setter
 @AllArgsConstructor
 @EqualsAndHashCode(of="idVehiculo")
 public class VehiculoModel {

@@ -1,16 +1,18 @@
 package com.policia.zona7.dto.asignaciones;
 
+import com.policia.zona7.model.VehiculoModel;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
-public record DatosAsignarDistritoVehiculoDto(
-        Long idDistritoVehiculo,
+public record DatosAsignarVehiculoPersonaDto(
+        Long idVehiculoPersona,
         @NotNull
         Long idVehiculo,
         @NotNull
-        Long idSubcircuito,
-        @NotNull
+        Long idPersona,
         Date fecha
+
+
 ) {
 }

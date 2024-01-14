@@ -4,13 +4,11 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
-public record DatosAsignarDistritoVehiculoDto(
-        Long idDistritoVehiculo,
-        @NotNull
+public record DatosActualizarVehiculoPersonaDto(
+        Long idVehiculoPersona,
         Long idVehiculo,
-        @NotNull
-        Long idSubcircuito,
-        @NotNull
+
+        Long idPersona,
         Date fecha
 ) {
 }
