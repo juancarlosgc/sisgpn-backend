@@ -1,5 +1,6 @@
 package com.policia.zona7.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.policia.zona7.dto.persona.DatosActualizarPersonaDto;
 import com.policia.zona7.dto.persona.DatosRegistroPersonaDto;
 import jakarta.persistence.*;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode(of="idPersona")
 
 public class PersonaModel {
@@ -36,11 +37,12 @@ public class PersonaModel {
     private RangoEnum rango;
     private Boolean estaActivo;
 
+    @JsonIgnoreProperties(value={"persona","hibernateLazyInitializer","handler"},allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vehiculo")  //OPCIONAL
     private VehiculoModel vehiculo;
 
-
+    @JsonIgnoreProperties(value={"persona","hibernateLazyInitializer","handler"},allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_subcircuito")  //OPCIONAL
     private SubcircuitoModel subcircuito;
@@ -62,6 +64,21 @@ public class PersonaModel {
         this.telefono=datosRegistroPersonaDto.telefono();
         this.rango=datosRegistroPersonaDto.rango();
         this.estaActivo=true;
+    }
+
+    public PersonaModel(Long idPersona, String cedula, String apellidos, String nombres, Date fechaNacimiento, String tipoSangre, String ciudadNacimiento, String telefono, RangoEnum rango, Boolean estaActivo, VehiculoModel vehiculo, SubcircuitoModel subcircuito) {
+        this.idPersona = idPersona;
+        this.cedula = cedula;
+        this.apellidos = apellidos;
+        this.nombres = nombres;
+        this.fechaNacimiento = fechaNacimiento;
+        this.tipoSangre = tipoSangre;
+        this.ciudadNacimiento = ciudadNacimiento;
+        this.telefono = telefono;
+        this.rango = rango;
+        this.estaActivo = estaActivo;
+        this.vehiculo = vehiculo;
+        this.subcircuito = subcircuito;
     }
 
     public void desactivarPersona() {

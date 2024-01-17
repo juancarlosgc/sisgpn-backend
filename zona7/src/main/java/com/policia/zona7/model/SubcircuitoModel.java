@@ -36,6 +36,13 @@ public class SubcircuitoModel {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subcircuito", cascade = CascadeType.ALL)
     private List<VehiculoModel> listaVehiculos;
 
+   /* @JsonIgnoreProperties(value={"subcircuitos","hibernateLazyInitializer","handler"},allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subcircuitos", cascade = CascadeType.ALL)
+    private List<ReclamosModel> listaReclamos;*/
+
+    /*@OneToMany(mappedBy = "registro", cascade = CascadeType.ALL)
+    private List<ReclamosModel> detalles;*/
+
     public void desactivarSubcircuito() {
         this.estaActivo=false;
     }

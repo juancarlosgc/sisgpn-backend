@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("vehiculospersonas")
@@ -33,15 +34,24 @@ public class AsignaVehiculoPersonaController {
     @PostMapping("/crear")
     @Transactional
     public ResponseEntity asignarVehiculoPersona(@RequestBody @Valid DatosAsignarVehiculoPersonaDto datos){
-        var idPersona= iPersonaRepository.findById(datos.idPersona()).get();
+        var persona= iPersonaRepository.findById(datos.idPersona()).get();
         var idVehiculo= iVehiculoRepository.findById(datos.idVehiculo()).get();
+
         var vehiculoPersona=new VehiculoPersonaModel(
                     null,
                     idVehiculo,
-                    idPersona,
+                    persona,
                     datos.fecha()
             );
-            iVehiculoPersonaRepository.save(vehiculoPersona);
+        iVehiculoPersonaRepository.save(vehiculoPersona);
+
+        Optional<PersonaModel> idSubcircuito = iPersonaRepository.findById(datos.idPersona());
+
+/*
+        //Actualiza tabla persona con el id de vehiculo asignado
+      var personaVehiculo=new PersonaModel(datos.idPersona(),persona.getCedula(),persona.getApellidos(),persona.getNombres(),persona.getFechaNacimiento(),persona.getTipoSangre(),persona.getCiudadNacimiento(),persona.getTelefono(),persona.getRango(),true,idVehiculo,idSubcircuito.get().getSubcircuito().getIdSubcircuito());
+       iPersonaRepository.save(personaVehiculo);*/
+
         return ResponseEntity.ok().build();
     }
 
@@ -76,9 +86,15 @@ public class AsignaVehiculoPersonaController {
 
     @DeleteMapping("/eliminar/{idVehiculoPersona}")
     @Transactional
-    public ResponseEntity eliminarSubcircuito(@PathVariable Long idVehiculoPersona){
+    public ResponseEntity eliminarSubcircuito(@PathVariable @RequestBody Long idVehiculoPersona,  DatosAsignarVehiculoPersonaDto datos){
+
         VehiculoPersonaModel vehiculoPersonaModel = iVehiculoPersonaRepository.getReferenceById(idVehiculoPersona);
-        // distritoPersonaModel.desactivarSubcircuito();
+
+        var idPersona= vehiculoPersonaModel.getPersona().getIdPersona();
+        var persona= iPersonaRepository.findById(vehiculoPersonaModel.getPersona().getIdPersona()).get();
+      //  var personaVehiculo=new PersonaModel(idPersona,persona.getCedula(),persona.getApellidos(),persona.getNombres(),persona.getFechaNacimiento(),persona.getTipoSangre(),persona.getCiudadNacimiento(),persona.getTelefono(),persona.getRango(),true);
+        //iPersonaRepository.save(personaVehiculo);
+
         iVehiculoPersonaRepository.delete(vehiculoPersonaModel);
         return ResponseEntity.noContent().build();
     }

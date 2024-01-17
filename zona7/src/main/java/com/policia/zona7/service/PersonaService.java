@@ -22,9 +22,9 @@ public class PersonaService {
         return ResponseEntity.ok(iPersonaRepository.findByEstaActivoTrue(paginacion).map(DatosListadoPersonaDto::new));
     }
 
-    public Optional<PersonaModel> buscarPorApellido(String apellido){
+  /*  public Optional<PersonaModel> buscarPorApellido(String apellido){
             return iPersonaRepository.findByApellidos(apellido);
-    }
+    }*/
 
 
 }

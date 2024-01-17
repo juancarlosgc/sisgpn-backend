@@ -6,12 +6,14 @@ import com.policia.zona7.dto.circuito.DatosActualizarCircuitoDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity(name="Circuito")
 @Table(name="circuitos")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode(of="idCircuito")
 public class CircuitoModel {
     @Id
@@ -27,7 +29,21 @@ public class CircuitoModel {
     @JsonIgnoreProperties(value={"circuitos","hibernateLazyInitializer","handler"},allowSetters = true)
     private DistritoModel distrito;
 
-   /* public void actualizarDatosCircuito(DatosActualizarCircuitoDto datos) {
+    /*@JsonIgnoreProperties(value={"circuitos","hibernateLazyInitializer","handler"},allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "circuitos", cascade = CascadeType.ALL)
+    private List<ReclamosModel> listaReclamos;*/
+
+
+
+        public CircuitoModel(Long idCircuito, String codigoCircuito, String nombreCircuito, Boolean estaActivo, DistritoModel distrito) {
+        this.idCircuito = idCircuito;
+        this.codigoCircuito = codigoCircuito;
+        this.nombreCircuito = nombreCircuito;
+        this.estaActivo = estaActivo;
+        this.distrito = distrito;
+    }
+
+    /* public void actualizarDatosCircuito(DatosActualizarCircuitoDto datos) {
         if (datos.codigoCircuito() != null) {
             this.codigoCircuito = datos.codigoCircuito();
         }

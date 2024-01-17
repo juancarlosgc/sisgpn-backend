@@ -1,5 +1,6 @@
 package com.policia.zona7.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.policia.zona7.dto.persona.DatosActualizarPersonaDto;
 import com.policia.zona7.dto.persona.DatosRegistroPersonaDto;
 import com.policia.zona7.dto.vehiculo.DatosActualizarVehiculoDto;
@@ -35,11 +36,13 @@ public class VehiculoModel {
     private Integer contador;
     private Boolean estaActivo;
 
+
+    @JsonIgnoreProperties(value={"vehiculo","hibernateLazyInitializer","handler"},allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vehiculo", cascade = CascadeType.ALL)
     private List<PersonaModel> listaPersonas;
 
 
-
+    @JsonIgnoreProperties(value={"vehiculo","hibernateLazyInitializer","handler"},allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idSubcircuito")  //OPCIONAL
     private SubcircuitoModel subcircuito;

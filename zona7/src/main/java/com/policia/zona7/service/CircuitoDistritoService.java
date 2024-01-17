@@ -27,5 +27,5 @@ public class CircuitoDistritoService {
         var distrito=iDistritoRepository.getReferenceById(datosActualizarCircuitoDto.idDistrito());
         var circuitoEditado= new CircuitoModel(circuito.getIdCircuito(), datosActualizarCircuitoDto.codigoCircuito(), datosActualizarCircuitoDto.nombreCircuito(),true, distrito);
         iCircuitoRepository.save(circuitoEditado);
-    }
+      }
    }
